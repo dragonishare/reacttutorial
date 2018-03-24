@@ -78,6 +78,7 @@ yarn add webpack-dev-server --dev
   }
 }
 ```
+* 第三步：开始写main.js和page，参考react文档即可
 
 
 
