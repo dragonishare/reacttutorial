@@ -3,31 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>hello react</title>
-    <script src="../lib/react-0.14.0.js"></script>
-    <script src="../lib/react-dom-0.14.0.js"></script>
-    <script src="../lib/browser.min-5.8.23.js"></script>
+    <script src="../lib/react-16.3.2.js"></script>
+    <script src="../lib/react-dom-16.3.2.js"></script>
+    <script src="../lib/babel.min-6.22.1.js"></script>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        var HelloWorld = React.createClass({
-            getInitialState() {
-                return {value: 'hello'};
-            },
-
-            handleChange(e) {
-                this.setState({value: e.target.value});
-            },
-
+        class HelloWorld extends React.Component {
             render() {
                 return (
                   <p>
-                    Hello, <input type="text" placeholder="Your name here" onChange={this.handleChange} value={this.state.value} />!
+                    Hello, <input type="text" placeholder="Your name here" />!
                     It is {this.props.date.toTimeString()}
                   </p>
                 );
             }
-        });
+
+        }
 
         setInterval(function(){
             ReactDOM.render(
