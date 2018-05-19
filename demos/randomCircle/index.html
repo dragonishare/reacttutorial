@@ -8,7 +8,9 @@
     <script src="../../lib/babel.min-6.22.1.js"></script></head>
 <body>
     <div id="root"></div>
+    <!--script type类型为text/babel用来编译JSX-->
     <script type="text/babel">
+        // 通过类的方式创建组件，组件使用render方法需要，需要return返回
         class Circle extends React.Component {
             render() {
                 let styleObj = {
@@ -25,7 +27,7 @@
                 )
             }
         }
-
+        // 通过纯函数的方式创建组件，需要return返回
         function showOneCircle() {
             let colors = ['#f00','#0f0','#ff0','#00f','#0ff']
             let ran = Math.floor(Math.random() * colors.length);
@@ -39,6 +41,8 @@
             let colorsArr = [];
             for (let i = 0; i < colors.length; i++) {
                 let ran = Math.floor(Math.random() * colors.length);
+
+                // 数组或迭代的时候需要给每一个子元素一个唯一的key，为了在虚拟dom，diff的时候使用
                 renderData.push(<Circle key={i + colors[ran]} bgColor={colors[ran]} />);
                 colorsArr.push(colors[ran]);
             }
