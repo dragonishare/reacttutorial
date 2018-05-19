@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机生成一个圆形</title>
+    <script src="../../lib/react-16.3.2.js"></script>
+    <script src="../../lib/react-dom-16.3.2.js"></script>
+    <script src="../../lib/babel.min-6.22.1.js"></script></head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Circle extends React.Component {
+            render() {
+                let styleObj = {
+                  width:50,
+                  height:50,
+                  padding: 10,
+                  margin: 50,
+                  display:'inline-block',
+                  borderRadius: '50%',
+                  backgroundColor: this.props.bgColor
+                }
+                return (
+                  <div style={styleObj}></div>
+                )
+            }
+        }
+
+        function showOneCircle() {
+            let colors = ['#f00','#0f0','#ff0','#00f','#0ff']
+            let ran = Math.floor(Math.random() * colors.length);
+            return <Circle bgColor={colors[ran]} />
+        }
+
+        function showManyCircle() {
+            let colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+
+            let renderData = [];
+            let colorsArr = [];
+            for (let i = 0; i < colors.length; i++) {
+                let ran = Math.floor(Math.random() * colors.length);
+                renderData.push(<Circle key={i + colors[ran]} bgColor={colors[ran]} />);
+                colorsArr.push(colors[ran]);
+            }
+            console.log('随机颜色是', colorsArr, '随机组件', renderData);
+            return renderData;
+        }
+
+        ReactDOM.render(
+          <div>
+            {showOneCircle()}
+            <br/>
+            {showManyCircle()}
+          </div>,
+          document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
