@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击计数</title>
+    <script src="../../lib/react-16.3.2.js"></script>
+    <script src="../../lib/react-dom-16.3.2.js"></script>
+    <script src="../../lib/babel.min-6.22.1.js"></script>
+</head>
+<style>
+    #root {
+        padding: 50px;
+        background-color: #fff;
+    }
+</style>
+
+<body>
+    <div id="root"></div>
+    <!--script type类型为text/babel用来编译JSX-->
+    <script type="text/babel">
+        // 通过类的方式创建组件，组件使用render方法需要，需要return返回
+        class Count extends React.Component {
+            render() {
+                let textStyle = {
+                    fontSize: 72,
+                    color: '#333',
+                    fontWeight: 'bold'
+                };
+
+                return (
+                    <div style={textStyle}>
+                        {this.props.display}
+                    </div>
+                );
+            }
+        }
+
+        class CountParent extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    count: 0
+                }
+            }
+            increase = (e) => {
+                //参数e是事件对象，如果是通过鼠标操作则包含的是鼠标事件对象；如果是键盘操作则包含的是键盘事件对象
+                console.log('e', e);
+                let currentCount = this.state.count;
+                if(e.shiftKey) {
+                    //如果鼠标点击时，shift同时被按下则一次加10
+                    currentCount += 10;
+                } else {
+                    currentCount += 1;
+                }
+                //箭头函数中的this指的是函数定义时所在宿主对象，这里指CountParent组件
+                this.setState({
+                    count: currentCount
+                });
+            }
+            render() {
+                let bgStyle = {
+                    width: 200,
+                    height: 100,
+                    padding: 50,
+                    textAlign: 'center',
+                    backgroundColor: '#ff0',
+                    borderRadius: 10
+                };
+                let buttonStyle = {
+                    width: 30,
+                    height: 30,
+                    fontSize: '1em',
+                    color: '#333',
+                    fontWeight: 'bold'
+                };
+                return (
+                    <div style={bgStyle}>
+                        <Count display={this.state.count} />
+                        <button style={buttonStyle} onClick={this.increase}> + </button>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <CountParent />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
