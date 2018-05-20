@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>颜色显示</title>
+    <script src="../../lib/react-16.3.2.js"></script>
+    <script src="../../lib/react-dom-16.3.2.js"></script>
+    <script src="../../lib/babel.min-6.22.1.js"></script>
+    <style>
+        #root {
+            padding: 50px;
+        }
+        .color-panel {
+            width: 240px;
+            height: 240px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 25px 0 #333;
+        }
+        .color-area input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+        }
+        .color-area button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #666;
+            border: 2px solid #666;
+        }
+        .color-area button:hover {
+            background-color: #111;
+            border-color: #111;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <!--script type类型为text/babel用来编译JSX-->
+    <script type="text/babel">
+        // 通过类的方式创建组件，组件使用render方法需要，需要return返回
+        class Colorizer extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    color: '',
+                    bgColor: ''
+                }
+            }
+            //获取input输入的值
+            getColor = (e) => {
+                console.log('input输入',e.target.value);
+                this.setState({
+                    color: e.target.value
+                })
+                console.log('input的颜色', this.state.color);
+            }
+
+            showColor = (e) => {
+                this.setState({
+                    bgColor: this.state.color
+                })
+                console.log('bgColor是', this.state.color);
+                this._input.value = "";
+                this._input.focus();
+            }
+
+            render() {
+                let self = this;
+                return (
+                    <div className="color-area">
+                    <span></span>{}
+                        <div className="color-panel" style={{backgroundColor: this.state.bgColor}}></div>
+                        <input
+                            type="text"
+                            placeholder="Please enter a color"
+                            onChange={this.getColor}
+                            ref={function(el) {
+                                self._input = el;
+                            }}
+                        />
+                        <button onClick={this.showColor}>Show</button>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(
+            <Colorizer />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
