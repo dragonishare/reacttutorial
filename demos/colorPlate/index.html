@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显色板</title>
+    <script src="../../lib/react-16.3.2.js"></script>
+    <script src="../../lib/react-dom-16.3.2.js"></script>
+    <script src="../../lib/babel.min-6.22.1.js"></script>
+    <style>
+        #root {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <!--script type类型为text/babel用来编译JSX-->
+    <script type="text/babel">
+        // 通过类的方式创建组件，组件使用render方法需要，需要return返回
+        class Block extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+
+            render() {
+                let blockStyle = {
+                    height: 150,
+                    backgroundColor: this.props.color
+                }
+                return (
+                    <div className="block" style={blockStyle}>
+                    </div>
+                )
+            }
+        }
+
+        class Label extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+
+            render() {
+                let labelStyle = {
+                    margin: 0,
+                    padding: 12,
+                    fontWeight: 'bold'
+                }
+
+                return (
+                    <div className="label">
+                    {this.props.color}
+                    </div>
+                );
+            }
+        }
+
+        class Card extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    color: '#f0f'
+                }
+            }
+
+            render() {
+                let cardStyle = {
+                    width: 150,
+                    height: 200,
+                    backgroundColor: '#fff',
+                    boxShadow: "0 0 9px 0 #f0f"
+                }
+
+                return (
+                    <div className="card" style={cardStyle}>
+                        <Block color={this.props.color} />
+                        <Label color={this.props.color} />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Card color="#f0f0f0" />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
