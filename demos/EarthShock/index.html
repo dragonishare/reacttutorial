@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地球电击</title>
+    <script src="../../lib/react-16.3.2.js"></script>
+    <script src="../../lib/react-dom-16.3.2.js"></script>
+    <script src="../../lib/babel.min-6.22.1.js"></script>
+    <style>
+        #root {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <!--script type类型为text/babel用来编译JSX-->
+    <script type="text/babel">
+        // 通过类的方式创建组件，组件使用render方法需要，需要return返回
+        class LightningCounter extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    strikes: 0
+                }
+            }
+            timerTick = () => {
+                this.setState({
+                    strikes: this.state.strikes + 100
+                });
+            }
+            componentDidMount() {
+                //setInterval默认是全局调用的，在浏览器里就是指window调用，因此timerTick里边的this指的就是window，这里通过箭头函数纠正了this的指向问题
+                setInterval(this.timerTick, 1000);
+            }
+
+            render() {
+                let counterStyle = {
+                    fontSize: 50,
+                    color: '#666fff'
+                }
+                // let count = this.state.strikes.toLocaleString();
+                let count = this.state.strikes.toLocaleString();
+                return (
+                    <h1 style={counterStyle}>{count}</h1>
+                )
+            }
+        }
+
+        class LightningCounterDisplay extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+
+            render() {
+                let commonStyle = {
+                    margin: 0,
+                    padding: 0
+                }
+                let divStyle = {
+                    width: 250,
+                    padding: 40,
+                    fontWeight: 'bold',
+                    color: '#999',
+                    textAlign: 'center',
+                    backgroundColor: '#000',
+                    borderRadius: 10
+                }
+                let textStyle = {
+                    emphasis: {
+                        fontSize: 38,
+                        ...commonStyle
+                    },
+                    smallEmphasis: {
+                        ...commonStyle
+                    },
+                    small: {
+                        fontSize: 17,
+                        opacity: .5,
+                        ...commonStyle
+                    }
+                }
+
+                return (
+                    <div style={divStyle}>
+                        <LightningCounter />
+                        <h2 style={textStyle.smallEmphasis}>电击了</h2>
+                        <h3 style={textStyle.emphasis}>我们的地球</h3>
+                        <p style={textStyle.smallEmphasis}>
+                            (自从加载这个组件之后)
+                        </p>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <LightningCounterDisplay />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
