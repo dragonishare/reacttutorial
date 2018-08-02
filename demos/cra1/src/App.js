@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-let a = '111'
-let b = x => x * 2
+let a = '111';
+let b = x => x * 2;
 const Item = item => {
-  return <div {...item}>hhh</div>
-}
+  return <div {...item}>hhh</div>;
+};
 class App extends Component {
   render() {
     return (
@@ -29,8 +29,8 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
