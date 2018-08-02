@@ -57,6 +57,32 @@ You can then set Prettier's own options inside a `.prettierrc` file.
 }
 ```
 
+### 添加`.editorconfig`文件保证不同编辑器风格一致
+
+两个空格缩进
+
+```
+# EditorConfig is awesome: https://EditorConfig.org
+# EditorConfig helps developers define and maintain
+# consistent coding styles between different editors and IDEs.
+
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+```
+
+如果需要不同编辑器对`.editorconfig`起作用，要安装并配置对应的插件
+本项目是通过 prettier 来读取`.editorconfig`配置文件
+
 ### 自动格式化代码配置 formatting-code-automatically
 
 ```
