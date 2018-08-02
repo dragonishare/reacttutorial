@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-let a = "111";
+let a = '111';
 let b = x => x * 2;
 const Item = item => {
   return <div {...item}>hhh</div>;
