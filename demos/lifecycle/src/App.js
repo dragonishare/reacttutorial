@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 let a = 'fdsfs';
+const b = x => x * 2;
 class App extends Component {
   render() {
     return (
@@ -11,7 +12,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">
             Welcome to React
-            {a}
+            {a * b}
           </h1>
         </header>
         <p className="App-intro">
