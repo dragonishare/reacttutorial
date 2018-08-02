@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 let a = "111";
+let b = x => x * 2;
 class App extends Component {
   render() {
     return (
