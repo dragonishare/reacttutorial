@@ -166,6 +166,37 @@ yarn run startapp
 
 ### 配置
 
+### 修改 main.js 代码
+
+```
++ const IS_DEV = process.env.NODE_ENV === 'development'
+
+-  mainWindow.loadURL('http://localhost:3000')
++  // 加载应用
++  const staticIndexPath = path.join(__dirname, './index.html');
++  const main = IS_DEV ? `http://localhost:3000` : url.format({
++    pathname: staticIndexPath,
++    protocol: 'file:',
++    slashes: true
++  });
++  mainWindow.loadURL(main)
+
+-  mainWindow.webContents.openDevTools()
++  IS_DEV && mainWindow.webContents.openDevTools()
+```
+
+修改`package.json`中的 `script`， 添加`NODE_ENV` 环境变量用于区分环境
+
+```
+- "start-electron": "electron .",
++ "start-electron": "NODE_ENV=development electron .",
+```
+
+### 修改`package.json`
+
+由于 `create-react-app` 默认打包的路径为` / `根目录，而在 `electron` 中，需要使用相对路径所以需要再次次改`package.json`
+
+
 * 修改 name，verison，description，author字段
 * 在 ./public文件夹中放入 icon.png 文件
 * 将 main.js 重命名为 electron.js，让如根目录./public 目录下。同时修改 package.json
@@ -222,6 +253,8 @@ yarn run startapp
 }
 
 ```
+
+之后运行`npm run packager` 即可得到 `dmg` 安装文件
 
 ## 参考地址
 

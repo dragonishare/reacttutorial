@@ -4,21 +4,39 @@
   "description": "A Electron app with react.",
   "author": "dragonishare<dragonishare@gmail.com>",
   "private": true,
-  "main": "main.js",
-  "dependencies": {
-    "electron": "^2.0.7",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4"
-  },
+  "main": "./public/electron.js",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "startapp": "electron ."
+    "startapp": "NODE_ENV=development electron .",
+    "packager": "npm run build && rm -rf dist && electron-builder"
+  },
+  "build": {
+    "mac": {
+      "category": "demo"
+    },
+    "files": [
+      {
+        "from": "./",
+        "to": "./",
+        "filter": [
+          "**/*",
+          "!node_modules"
+        ]
+      }
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "devDependencies": {
-    "electron-builder": "^20.27.1"
+    "electron": "^2.0.7",
+    "electron-builder": "^20.27.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4"
   }
 }
