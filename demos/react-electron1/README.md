@@ -188,8 +188,8 @@ yarn run startapp
 修改`package.json`中的 `script`， 添加`NODE_ENV` 环境变量用于区分环境
 
 ```
-- "start-electron": "electron .",
-+ "start-electron": "NODE_ENV=development electron .",
+- "startapp": "electron .",
++ "startapp": "NODE_ENV=development electron .",
 ```
 
 ### 修改`package.json`
@@ -237,7 +237,7 @@ yarn run startapp
 +    }
 +  },
   "scripts": {
-    "start-electron": "NODE_ENV=development electron .",
+    "startapp": "NODE_ENV=development electron .",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
